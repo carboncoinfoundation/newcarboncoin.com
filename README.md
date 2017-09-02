@@ -1,3 +1,23 @@
+# New Carboncoin
+
+The site is served using Github Pages and Amazon Cloudfront.
+
+The 'develop' branch is where development work takes place.
+
+The 'master' branch is production.
+
+### Making changes
+
+Check out this guide to understand the Github Flow:
+
+https://guides.github.com/introduction/flow/
+
+To make changes, create a new branch (based off master) using the dropdown menu on the repository homepage. Call it 'your-name/what-you-are-updating'.
+
+Make your changes and commit them into your branch.
+
+Once you are finished, create a pull request into the master branch. All Pull Requests need to be reviewed! Once your branch has been merged into the master branch, it will be live.
+
 ## Welcome to GitHub Pages
 
 You can use the [editor on GitHub](https://github.com/carboncoinfoundation/newcarboncoin.com/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
@@ -27,11 +47,3 @@ Syntax highlighted code block
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/carboncoinfoundation/newcarboncoin.com/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
