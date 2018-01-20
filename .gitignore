@@ -2,4 +2,5 @@ bootstrap
 .DS_Store
 .sass-cache
 assets
+_site
 node_modules
