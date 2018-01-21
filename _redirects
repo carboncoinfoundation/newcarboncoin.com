@@ -8,7 +8,7 @@
 # /pass-through /index.html                  200
 
 # Invisbily proxy to a third party API
-/ico-backend/  https://services.newcarboncoin.com/     200
+https://www.newcarboncoin.com/ico-backend/  https://services.newcarboncoin.com/     200
 
 # Show a custom 404 for a path
 # /special-offer    /too-late-its-over       404
