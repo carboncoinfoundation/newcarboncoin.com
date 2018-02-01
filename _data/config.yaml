@@ -1,11 +1,4 @@
-# site_url: http://localhost:4000
-# redirect_url: localhost:4000
-# cdn: http://localhost:4000/cdn
-# ga: UA-XXXXX-1
-# mailchimp_url: //carboncoin.us13.list-manage.com/subscribe/post?u=42b0a3c344a4be90aaeaeaf99&amp;id=5def9768e1
-
-site_url: https://newcarboncoin.com
-redirect_url: www.newcarboncoin.com
-cdn: https://newcarboncoin.com/cdn
-ga: UA-XXXXX-2
-mailchimp_url: //carboncoin.us13.list-manage.com/subscribe/post?u=42b0a3c344a4be90aaeaeaf99&amp;id=5def9768e1
+site_url: http://localhost:4000
+cdn: http://localhost:4000/cdn
+# site_url: https://www.newcarboncoin.com
+# cdn: https://www.newcarboncoin.com/cdn
