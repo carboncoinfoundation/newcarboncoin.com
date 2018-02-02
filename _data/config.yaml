@@ -1,4 +1,4 @@
-site_url: http://localhost:4000
-cdn: http://localhost:4000/cdn
-# site_url: https://www.newcarboncoin.com
-# cdn: https://www.newcarboncoin.com/cdn
+# site_url: http://localhost:4000
+# cdn: http://localhost:4000/cdn
+site_url: https://www.newcarboncoin.com
+cdn: https://www.newcarboncoin.com/cdn
