@@ -70,15 +70,15 @@ class TokenStatus extends React.Component {
 class ContractStatus extends React.Component {
   render() {
     const { tokenName, tokenAddress, tokenChoice, price } = this.props;
-    const explorerUrl = `${TokenInfo[tokenName].blockExplorerURL}/token/${TokenInfo[tokenName.contractAddress]}`;
+    const explorerUrl = `${TokenInfo[tokenName].blockExplorerURL}/contract/${TokenInfo[tokenName].contractAddress}`;
     return (
       <div className={`ContractStatus ContractStatus-Selected_${tokenChoice === tokenName}`}>
         <h4>{TokenInfo[tokenName].networkName}</h4>
         <dl className="right">
           <dt>Token:</dt><dd>{tokenName}</dd>
-          <dt>Links:</dt><dd><a href={explorerUrl} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
+          <dt>Links:</dt><dd><a href={explorerUrl} target="new">Crowdsale contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
           <dt className="total">Price per token:</dt><dd className="total">{price} { TokenInfo[tokenName].networkCurrencyName }</dd>
-          <dt>Contract Address</dt><dd>{tokenAddress}</dd>
+          <dt>Contract Address</dt><dd className="smaller">{tokenAddress}</dd>
 
         </dl>
       </div>
