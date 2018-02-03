@@ -1,6 +1,6 @@
-site_url: http://localhost:4000
-cdn: http://localhost:4000/cdn
-ico_backend: http://localhost:8080
-# site_url: https://www.newcarboncoin.com
-# cdn: https://www.newcarboncoin.com/cdn
-# ico_backend: https://services.newcarboncoin.com
+# site_url: http://localhost:4000
+# cdn: http://localhost:4000/cdn
+# ico_backend: http://localhost:8080
+site_url: https://www.newcarboncoin.com
+cdn: https://www.newcarboncoin.com/cdn
+ico_backend: https://services.newcarboncoin.com
