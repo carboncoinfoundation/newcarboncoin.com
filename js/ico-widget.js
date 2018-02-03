@@ -14,7 +14,6 @@ class ICODataWidget extends React.Component {
     })
     .then((response => response.json()))
     .then((json => {
-      json.ETC_wallet = parseFloat(json.ETC_wallet)
       this.setState(json)
     }))
     .catch(function(ex) {
@@ -73,7 +72,7 @@ class TokenStatus extends React.Component {
 
 class ContractStatus extends React.Component {
   render() {
-    const { tokenName, tokenAddress, tokenChoice, price } = this.props;
+    const { tokenName, tokenAddress, tokenChoice} = this.props;
     const explorerUrl = `${TokenInfo[tokenName].blockExplorerURL}/contract/${TokenInfo[tokenName].contractAddress}`;
     return (
       <div className={`ContractStatus ContractStatus-Selected_${tokenChoice === tokenName}`}>
@@ -81,7 +80,7 @@ class ContractStatus extends React.Component {
         <dl className="right">
           <dt>Token:</dt><dd>{tokenName}</dd>
           <dt>Links:</dt><dd><a href={explorerUrl} target="new">Crowdsale contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
-          <dt className="total">Price per token:</dt><dd className="total">{price} { TokenInfo[tokenName].networkCurrencyName }</dd>
+          <dt className="total">Price per token:</dt><dd className="total">{TokenInfo[tokenName].tokenCost} { TokenInfo[tokenName].networkCurrencyName }</dd>
           <dt>Contract Address</dt><dd className="smaller">{tokenAddress}</dd>
 
         </dl>
@@ -136,12 +135,12 @@ class ContractsWidget extends React.Component {
             <div className="row">
               <div className="col-md-6 col-sm-12">
                 <section onClick={() => this.props.handleChooseToken('NCC')}>
-                  <ContractStatus tokenName="NCC" tokenChoice={tokenChoice} tokenAddress={NCC_Contract} price={2342.1231} />
+                  <ContractStatus tokenName="NCC" tokenChoice={tokenChoice} tokenAddress={NCC_Contract} />
                 </section>
               </div>
               <div className="col-md-6  col-sm-12">
                 <section onClick={() => this.props.handleChooseToken('NCCh')}>
-                  <ContractStatus tokenName="NCCh" tokenChoice={tokenChoice} tokenAddress={NCCh_Contract} price={9873.1231} />
+                  <ContractStatus tokenName="NCCh" tokenChoice={tokenChoice} tokenAddress={NCCh_Contract} />
                 </section>
               </div>
             </div>
@@ -180,7 +179,7 @@ class TermsWidget extends React.Component {
   }
 
   render() {
-    const { tokenName, tokensDistributed, tokenCost } = this.props;
+    const { tokenName, tokensDistributed } = this.props;
     const {t1, t2, t3} = this.state;
 
     return (
