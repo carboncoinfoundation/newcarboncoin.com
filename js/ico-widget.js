@@ -184,7 +184,7 @@ class TermsWidget extends React.Component {
         <div className="container">
           <div className="col-md-6 col-sm-12">
             <section>
-              <h2>Before we proceed</h2>
+              <h2>Participate in our ICO</h2>
               <p>You must accept all the terms and conditions of the Carboncoin ICO before proceeding. We are only sharing the ICO contract details with people who explicitly opt in to the conditions.</p>
             </section>
           </div>
