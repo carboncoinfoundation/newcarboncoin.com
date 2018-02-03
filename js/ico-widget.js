@@ -1,3 +1,5 @@
+
+
 class ICODataWidget extends React.Component {
 
   state = {
@@ -6,7 +8,7 @@ class ICODataWidget extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://services.newcarboncoin.com/ico/get-token-data', {
+    fetch(`${ICO_backendURL}/ico/get-token-data`, {
       credentials: 'same-origin'
     })
     .then((response => response.json()))
@@ -92,7 +94,7 @@ class ContractsWidget extends React.Component {
   }
 
   componentDidMount() {
-    fetch('https://services.newcarboncoin.com/ico/get-contract-addresses', {
+    fetch(`${ICO_backendURL}/ico/get-contract-addresses`, {
       credentials: 'include'
     })
     .then((response => {
@@ -158,7 +160,7 @@ class TermsWidget extends React.Component {
   }
 
   acceptTerms = () => {
-    fetch('https://services.newcarboncoin.com/ico/set-acceptance-cookie', {
+    fetch(`${ICO_backendURL}/ico/set-acceptance-cookie`, {
       credentials: 'include',
       mode: 'no-cors',
     })
