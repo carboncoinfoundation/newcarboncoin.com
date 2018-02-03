@@ -256,7 +256,7 @@ class InstructionsWidget extends React.Component {
 
                 <p className="important-data">{ TokenInfo[tokenChoice].contractAddress }</p>
 
-                <p>The price is { tokenCost } { networkCurrencyName } for each { tokenChoice } token</p>
+                <p>You will receive { tokenCost } { tokenChoice } for 1 { networkCurrencyName }</p>
                 <p>When you send the ICO Contract some Ether, it will mint your NCC tokens and transfer them to your { networkName } address.</p>
               </div>
               <div className="InstructionsWidget-Step">
