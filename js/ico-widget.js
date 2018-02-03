@@ -5,6 +5,7 @@ class ICODataWidget extends React.Component {
   state = {
     NCCh_tokens_left: 0,
     NCC_tokens_left: 0,
+    ETC_wallet: 0,
   }
 
   componentDidMount() {
@@ -12,7 +13,10 @@ class ICODataWidget extends React.Component {
       credentials: 'same-origin'
     })
     .then((response => response.json()))
-    .then((json => this.setState(json)))
+    .then((json => {
+      json.ETC_wallet = parseFloat(json.ETC_wallet)
+      this.setState(json)
+    }))
     .catch(function(ex) {
       console.log('parsing failed', ex)
     })
@@ -20,13 +24,13 @@ class ICODataWidget extends React.Component {
 
   render() {
     const { children } = this.props;
-    const { NCCh_tokens_left, NCC_tokens_left } = this.state;
+    const { NCCh_tokens_left, NCC_tokens_left, ETC_wallet } = this.state;
     return (
       <div className="full-width-white">
         <div className="container">
           <div className="row">
             <TokenStatus tokenName="CCE" tokensDistributed="1450" />
-            <TokenStatus tokenName="NCC" tokensDistributed={ NCC_tokens_left } />
+            <TokenStatus tokenName="NCC" eth_raised={ETC_wallet} tokensDistributed={ NCC_tokens_left } />
             <TokenStatus tokenName="NCCh" tokensDistributed={ NCCh_tokens_left } />
 
           </div>
@@ -39,7 +43,7 @@ class ICODataWidget extends React.Component {
 class TokenStatus extends React.Component {
 
   render() {
-    const {tokenName, tokensDistributed} = this.props;
+    const {tokenName, tokensDistributed, eth_raised} = this.props;
     const blockExplorerURL = `${TokenInfo[tokenName].blockExplorerURL}/token/${TokenInfo[tokenName].tokenAddress}`;
     return (
       <div className="col-md-4 col-sm-12">
@@ -49,7 +53,7 @@ class TokenStatus extends React.Component {
             <dl className="right">
               <dt>Network:</dt><dd>{TokenInfo[tokenName].networkName}</dd>
               <dt>Total supply:</dt><dd>40,000,000</dd>
-              <dt className="total">Total issued:</dt><dd className="total">{tokensDistributed}</dd>
+              <dt className="total">Total issued:</dt><dd className="total">{eth_raised * TokenInfo[tokenName].tokenCost}</dd>
               <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
             </dl>
           )}
@@ -274,7 +278,7 @@ class InstructionsWidget extends React.Component {
 
 const TokenInfo = {
   NCC: {
-    tokenCost: 43124.12312,
+    tokenCost: 1000,
     tokenAddress: '0x7d9597009966630DF9Ae4fA56AFAc2B6ee0De938',
     networkCurrencyName: "Ether Classic",
     networkName: "Ethereum Classic",
