@@ -30,7 +30,7 @@ class ICODataWidget extends React.Component {
           <div className="row">
             <TokenStatus tokenName="CCE" tokensDistributed="1450" />
             <TokenStatus tokenName="NCC" eth_raised={ETC_wallet} tokensDistributed={ NCC_tokens_left } />
-            <TokenStatus tokenName="NCCh" tokensDistributed={ NCCh_tokens_left } />
+            <TokenStatus tokenName="NCCh" eth_raised={0} tokensDistributed={ NCCh_tokens_left } />
 
           </div>
         </div>
@@ -79,9 +79,10 @@ class ContractStatus extends React.Component {
         <h4>{TokenInfo[tokenName].networkName}</h4>
         <dl className="right">
           <dt>Token:</dt><dd>{tokenName}</dd>
-          <dt>Links:</dt><dd><a href={explorerUrl} target="new">Crowdsale contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
-          <dt className="total">Price per token:</dt><dd className="total">{TokenInfo[tokenName].tokenCost} { TokenInfo[tokenName].networkCurrencyName }</dd>
           <dt>Contract Address</dt><dd className="smaller">{tokenAddress}</dd>
+
+          <dt className="total">Price:</dt><dd className="total">{TokenInfo[tokenName].tokenCost} {tokenName} / 1 { TokenInfo[tokenName].networkCurrencyName }</dd>
+          <dt>Links:</dt><dd><a href={explorerUrl} target="new">Crowdsale contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
 
         </dl>
       </div>
@@ -277,14 +278,14 @@ class InstructionsWidget extends React.Component {
 
 const TokenInfo = {
   NCC: {
-    tokenCost: 1000,
+    tokenCost: 64,
     tokenAddress: '0x7d9597009966630DF9Ae4fA56AFAc2B6ee0De938',
     networkCurrencyName: "Ether Classic",
     networkName: "Ethereum Classic",
     blockExplorerURL: "http://gastracker.io"
   },
   NCCh: {
-    tokenCost: 123.14234,
+    tokenCost: 2240,
     tokenAddress: '0x879597009966630DF9Ae4fA56AFAc2B6ee0De938',
     networkCurrencyName: "Ether",
     networkName: "Ethereum",
