@@ -71,6 +71,10 @@ class TokenStatus extends React.Component {
 }
 
 class ContractStatus extends React.Component {
+  componentDidUpdate(){
+    window.scrollTo(0, 15000);
+  }
+
   render() {
     const { tokenName, tokenAddress, tokenChoice} = this.props;
     const explorerUrl = `${TokenInfo[tokenName].blockExplorerURL}/contract/${TokenInfo[tokenName].contractAddress}`;
@@ -122,7 +126,7 @@ class ContractsWidget extends React.Component {
         <div className="full-width-grey">
           <div className="container">
             <div className="row">
-              <div className="col-md-5 col-md-offset-2">
+              <div className="col-md-5 col-md-offset-1">
                 <h2>Please choose a network</h2>
                 <p>The same Crowdsale ICO contract is running on Ethereum Classic and Ethereum.</p>
                 <p>We wanted to make participation in the ICO as accessible as possible.</p>
@@ -170,6 +174,7 @@ class TermsWidget extends React.Component {
     })
     .then((response => response))
     .then((body => this.props.handleAcceptTurns()))
+    .then(() => window.scrollTo(0, 15000))
     .catch(function(ex) {
       console.log('request failed', ex)
     })
@@ -186,13 +191,13 @@ class TermsWidget extends React.Component {
     return (
       <div className="TermsWidget full-width-grey">
         <div className="container">
-          <div className="col-md-6 col-sm-12">
+          <div className="col-md-5 col-md-offset-1">
             <section>
               <h2>Participate in our ICO</h2>
               <p>You must accept all the terms and conditions of the Carboncoin ICO before proceeding. We are only sharing the ICO contract details with people who explicitly opt in to the conditions.</p>
             </section>
           </div>
-          <div className="col-md-5 col-md-offset-1 col-sm-12">
+          <div className="col-md-5 col-md-offset-1">
             <section className="terms">
               <p>Please read and accept the following terms to proceed with the ICO.</p>
               <AcceptanceCheckbox name="t1" text="I have read the Privacy Policy" name="t1" value="privacy" ticked={t1} handleToggle={this.acceptItem} />
