@@ -1,28 +1,22 @@
 # New Carboncoin
 
-The site is served using Github Pages and Amazon Cloudfront.
+The site is a static served using Netlify.
 
-The 'develop' branch is where development work takes place.
+It uses Bootstrap 4 for layout.
 
-The 'master' branch is production.
+The ICO section of the site is a simple React app that loads the ICO contract details from [Carboncoin ICO Backend](https://gitub.com/carboncoinfoundation/ico-backend) if a user has accepted the terms and conditions.
 
 ### Making changes
-
-Check out this guide to understand the Github Flow:
-
-https://guides.github.com/introduction/flow/
 
 To make changes, create a new branch (based off master) using the dropdown menu on the repository homepage. Call it 'your-name/what-you-are-updating'.
 
 Make your changes and commit them into your branch.
 
-Once you are finished, create a pull request into the master branch. All Pull Requests need to be reviewed! Once your branch has been merged into the master branch, it will be live.
+Once you are finished, create a pull request into the master branch. All Pull Requests need to be reviewed! Deployments to Netlify are not automatic.
 
-## Welcome to GitHub Pages
+Check out this guide to understand the Github Flow:
 
-You can use the [editor on GitHub](https://github.com/carboncoinfoundation/newcarboncoin.com/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+https://guides.github.com/introduction/flow/  
 
 ### Markdown
 
