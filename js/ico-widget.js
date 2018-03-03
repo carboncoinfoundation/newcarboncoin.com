@@ -305,8 +305,7 @@ class ICOWidget extends React.Component {
 
   state = {
     acceptedTerms: false,
-    tokenChoice: false,
-    contractAddress: null, // why only one address
+    tokenChoice: false
   }
 
   acceptTerms = () => {
