@@ -3,9 +3,8 @@
 class ICODataWidget extends React.Component {
 
   state = {
-    NCCh_tokens_left: 0,
-    NCC_tokens_left: 0,
     ETC_wallet: 0,
+    ETH_wallet: 0
   }
 
   componentDidMount() {
@@ -23,14 +22,16 @@ class ICODataWidget extends React.Component {
 
   render() {
     const { children } = this.props;
-    const { NCCh_tokens_left, NCC_tokens_left, ETC_wallet } = this.state;
+    const {ETC_wallet, ETH_wallet} = this.state;
+    const NCC_distributed = ETC_wallet * TokenInfo["NCC"].tokenCost;
+    const NCCh_distributed = ETH_wallet * TokenInfo["NCCh"].tokenCost;
     return (
       <div className="full-width-white">
         <div className="container">
           <div className="row">
-            <TokenStatus tokenName="CCE" tokensDistributed="1450" />
-            <TokenStatus tokenName="NCC" eth_raised={ETC_wallet} tokensDistributed={ NCC_tokens_left } />
-            <TokenStatus tokenName="NCCh" eth_raised={0} tokensDistributed={ NCCh_tokens_left } />
+            <TokenStatus tokenName="CCE" tokensDistributed="600,000" />
+            <TokenStatus tokenName="NCC" tokensDistributed={NCC_distributed} eth_raised={ETC_wallet} />
+            <TokenStatus tokenName="NCCh" tokensDistributed={NCCh_distributed} eth_raised={ETH_wallet} />
 
           </div>
         </div>
@@ -52,7 +53,7 @@ class TokenStatus extends React.Component {
             <dl className="right">
               <dt>Network:</dt><dd>{TokenInfo[tokenName].networkName}</dd>
               <dt>Total supply:</dt><dd>40,000,000</dd>
-              <dt className="total">Total issued:</dt><dd className="total">{eth_raised * TokenInfo[tokenName].tokenCost}</dd>
+              <dt className="total">Total issued:</dt><dd className="total">{tokensDistributed}</dd>
               <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
             </dl>
           )}
@@ -60,7 +61,7 @@ class TokenStatus extends React.Component {
             <dl className="right">
               <dt>Network:</dt><dd>{TokenInfo[tokenName].networkName}</dd>
               <dt>Total supply:</dt><dd>80,000,000</dd>
-              <dt className="total">Total issued:</dt><dd className="total">23,000,000</dd>
+              <dt className="total">Total issued:</dt><dd className="total">{tokensDistributed}</dd>
               <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/swapout" target="new">source code</a></dd>
             </dl>
           )}
@@ -311,7 +312,7 @@ class ICOWidget extends React.Component {
   state = {
     acceptedTerms: false,
     tokenChoice: false,
-    contractAddress: null,
+    contractAddress: null, // why only one address
   }
 
   acceptTerms = () => {
