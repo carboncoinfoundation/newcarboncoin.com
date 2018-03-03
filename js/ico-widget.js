@@ -29,9 +29,9 @@ class ICODataWidget extends React.Component {
       <div className="full-width-white">
         <div className="container">
           <div className="row">
-            <TokenStatus tokenName="CCE" tokensDistributed="600,000" />
-            <TokenStatus tokenName="NCC" tokensDistributed={NCC_distributed} eth_raised={ETC_wallet} />
-            <TokenStatus tokenName="NCCh" tokensDistributed={NCCh_distributed} eth_raised={ETH_wallet} />
+            <TokenStatus tokenName="CCE" tokenSupply="80,000,000" tokensDistributed="600,000" />
+            <TokenStatus tokenName="NCC" tokenSupply="40,000,000" tokensDistributed={NCC_distributed} eth_raised={ETC_wallet} />
+            <TokenStatus tokenName="NCCh" tokenSupply="40,000,000" tokensDistributed={NCCh_distributed} eth_raised={ETH_wallet} />
 
           </div>
         </div>
@@ -43,28 +43,19 @@ class ICODataWidget extends React.Component {
 class TokenStatus extends React.Component {
 
   render() {
-    const {tokenName, tokensDistributed, eth_raised} = this.props;
+    const {tokenName, tokenSupply, tokensDistributed, eth_raised} = this.props;
     const blockExplorerURL = `${TokenInfo[tokenName].blockExplorerURL}/token/${TokenInfo[tokenName].tokenAddress}`;
     return (
       <div className="col-md-4 col-sm-12">
         <section className="TokenStatus">
           <h4>{tokenName}</h4>
-          {tokenName != 'CCE' && (
             <dl className="right">
               <dt>Network:</dt><dd>{TokenInfo[tokenName].networkName}</dd>
-              <dt>Total supply:</dt><dd>40,000,000</dd>
+              <dt>Total supply:</dt><dd>{tokenSupply}</dd>
               <dt className="total">Total issued:</dt><dd className="total">{tokensDistributed}</dd>
-              <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
+              <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href={TokenInfo[tokenName].sourceCodeUrl} target="new">source code</a></dd>
             </dl>
-          )}
-          {tokenName === 'CCE' && (
-            <dl className="right">
-              <dt>Network:</dt><dd>{TokenInfo[tokenName].networkName}</dd>
-              <dt>Total supply:</dt><dd>80,000,000</dd>
-              <dt className="total">Total issued:</dt><dd className="total">{tokensDistributed}</dd>
-              <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/swapout" target="new">source code</a></dd>
-            </dl>
-          )}
+
         </section>
       </div>
     )
@@ -288,7 +279,8 @@ const TokenInfo = {
     tokenAddress: '0x7d9597009966630DF9Ae4fA56AFAc2B6ee0De938',
     networkCurrencyName: "Ether Classic",
     networkName: "Ethereum Classic",
-    blockExplorerURL: "http://gastracker.io"
+    blockExplorerURL: "http://gastracker.io", 
+    sourceCodeUrl: "https://github.com/carboncoinfoundation/ico"
   },
   NCCh: {
     tokenCost: 2240,
@@ -296,12 +288,14 @@ const TokenInfo = {
     networkCurrencyName: "Ether",
     networkName: "Ethereum",
     blockExplorerURL: "https://etherscan.io",
+    sourceCodeUrl: "https://github.com/carboncoinfoundation/ico"
   },
   CCE: {
     tokenAddress: '0x47f92ebf4881359469bceffe1f753fe910701024',
     networkCurrencyName: "Ether",
     networkName: "Ethereum",
     blockExplorerURL: "https://etherscan.io",
+    sourceCodeUrl: "https://github.com/carboncoinfoundation/swapout"
   }
 }
 
