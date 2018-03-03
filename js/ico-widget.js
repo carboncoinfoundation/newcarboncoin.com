@@ -3,9 +3,8 @@
 class ICODataWidget extends React.Component {
 
   state = {
-    NCCh_tokens_left: 0,
-    NCC_tokens_left: 0,
     ETC_wallet: 0,
+    ETH_wallet: 0
   }
 
   componentDidMount() {
@@ -23,14 +22,16 @@ class ICODataWidget extends React.Component {
 
   render() {
     const { children } = this.props;
-    const { NCCh_tokens_left, NCC_tokens_left, ETC_wallet } = this.state;
+    const {ETC_wallet, ETH_wallet} = this.state;
+    const NCC_distributed = ETC_wallet * TokenInfo["NCC"].tokenCost;
+    const NCCh_distributed = ETH_wallet * TokenInfo["NCCh"].tokenCost;
     return (
       <div className="full-width-white">
         <div className="container">
           <div className="row">
-            <TokenStatus tokenName="CCE" tokensDistributed="1450" />
-            <TokenStatus tokenName="NCC" eth_raised={ETC_wallet} tokensDistributed={ NCC_tokens_left } />
-            <TokenStatus tokenName="NCCh" eth_raised={0} tokensDistributed={ NCCh_tokens_left } />
+            <TokenStatus tokenName="CCE" tokenSupply="80,000,000" tokensDistributed="600,000" />
+            <TokenStatus tokenName="NCC" tokenSupply="40,000,000" tokensDistributed={NCC_distributed} eth_raised={ETC_wallet} />
+            <TokenStatus tokenName="NCCh" tokenSupply="40,000,000" tokensDistributed={NCCh_distributed} eth_raised={ETH_wallet} />
 
           </div>
         </div>
@@ -42,28 +43,19 @@ class ICODataWidget extends React.Component {
 class TokenStatus extends React.Component {
 
   render() {
-    const {tokenName, tokensDistributed, eth_raised} = this.props;
+    const {tokenName, tokenSupply, tokensDistributed, eth_raised} = this.props;
     const blockExplorerURL = `${TokenInfo[tokenName].blockExplorerURL}/token/${TokenInfo[tokenName].tokenAddress}`;
     return (
       <div className="col-md-4 col-sm-12">
         <section className="TokenStatus">
           <h4>{tokenName}</h4>
-          {tokenName != 'CCE' && (
             <dl className="right">
               <dt>Network:</dt><dd>{TokenInfo[tokenName].networkName}</dd>
-              <dt>Total supply:</dt><dd>40,000,000</dd>
-              <dt className="total">Total issued:</dt><dd className="total">{eth_raised * TokenInfo[tokenName].tokenCost}</dd>
-              <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/ico" target="new">source code</a></dd>
+              <dt>Total supply:</dt><dd>{tokenSupply}</dd>
+              <dt className="total">Total issued:</dt><dd className="total">{tokensDistributed}</dd>
+              <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href={TokenInfo[tokenName].sourceCodeUrl} target="new">source code</a></dd>
             </dl>
-          )}
-          {tokenName === 'CCE' && (
-            <dl className="right">
-              <dt>Network:</dt><dd>{TokenInfo[tokenName].networkName}</dd>
-              <dt>Total supply:</dt><dd>80,000,000</dd>
-              <dt className="total">Total issued:</dt><dd className="total">23,000,000</dd>
-              <dt>Links:</dt><dd><a href={blockExplorerURL} target="new">token contract</a> • <a href="https://github.com/carboncoinfoundation/swapout" target="new">source code</a></dd>
-            </dl>
-          )}
+
         </section>
       </div>
     )
@@ -71,6 +63,10 @@ class TokenStatus extends React.Component {
 }
 
 class ContractStatus extends React.Component {
+  componentDidUpdate(){
+    window.scrollTo(0, 15000);
+  }
+
   render() {
     const { tokenName, tokenAddress, tokenChoice} = this.props;
     const explorerUrl = `${TokenInfo[tokenName].blockExplorerURL}/contract/${TokenInfo[tokenName].contractAddress}`;
@@ -122,7 +118,7 @@ class ContractsWidget extends React.Component {
         <div className="full-width-grey">
           <div className="container">
             <div className="row">
-              <div className="col-md-5 col-md-offset-2">
+              <div className="col-md-5 col-md-offset-1">
                 <h2>Please choose a network</h2>
                 <p>The same Crowdsale ICO contract is running on Ethereum Classic and Ethereum.</p>
                 <p>We wanted to make participation in the ICO as accessible as possible.</p>
@@ -170,6 +166,7 @@ class TermsWidget extends React.Component {
     })
     .then((response => response))
     .then((body => this.props.handleAcceptTurns()))
+    .then(() => window.scrollTo(0, 15000))
     .catch(function(ex) {
       console.log('request failed', ex)
     })
@@ -186,13 +183,13 @@ class TermsWidget extends React.Component {
     return (
       <div className="TermsWidget full-width-grey">
         <div className="container">
-          <div className="col-md-6 col-sm-12">
+          <div className="col-md-5 col-md-offset-1">
             <section>
               <h2>Participate in our ICO</h2>
               <p>You must accept all the terms and conditions of the Carboncoin ICO before proceeding. We are only sharing the ICO contract details with people who explicitly opt in to the conditions.</p>
             </section>
           </div>
-          <div className="col-md-5 col-md-offset-1 col-sm-12">
+          <div className="col-md-5 col-md-offset-1">
             <section className="terms">
               <p>Please read and accept the following terms to proceed with the ICO.</p>
               <AcceptanceCheckbox name="t1" text="I have read the Privacy Policy" name="t1" value="privacy" ticked={t1} handleToggle={this.acceptItem} />
@@ -282,7 +279,8 @@ const TokenInfo = {
     tokenAddress: '0x7d9597009966630DF9Ae4fA56AFAc2B6ee0De938',
     networkCurrencyName: "Ether Classic",
     networkName: "Ethereum Classic",
-    blockExplorerURL: "http://gastracker.io"
+    blockExplorerURL: "http://gastracker.io", 
+    sourceCodeUrl: "https://github.com/carboncoinfoundation/ico"
   },
   NCCh: {
     tokenCost: 2240,
@@ -290,12 +288,14 @@ const TokenInfo = {
     networkCurrencyName: "Ether",
     networkName: "Ethereum",
     blockExplorerURL: "https://etherscan.io",
+    sourceCodeUrl: "https://github.com/carboncoinfoundation/ico"
   },
   CCE: {
     tokenAddress: '0x47f92ebf4881359469bceffe1f753fe910701024',
     networkCurrencyName: "Ether",
     networkName: "Ethereum",
     blockExplorerURL: "https://etherscan.io",
+    sourceCodeUrl: "https://github.com/carboncoinfoundation/swapout"
   }
 }
 
@@ -305,8 +305,7 @@ class ICOWidget extends React.Component {
 
   state = {
     acceptedTerms: false,
-    tokenChoice: false,
-    contractAddress: null,
+    tokenChoice: false
   }
 
   acceptTerms = () => {
